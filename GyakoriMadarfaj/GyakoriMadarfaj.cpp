@@ -3,20 +3,27 @@
 
 using namespace std;
 
-int main()
-{
-	int M, N;
+int M, N;
+int** area;
+
+void input() {
 	cin >> M >> N;
-	int** area = new int* [M];
-	for (int i = 0; i < M; i++) {
-		area[i] = new int[N];
-		for (int j = 0; j < N; j++) {
-			cin >> area[i][j];
+	if (M >= 1 && M <= 50 && N >= 1 && N <= 200) {
+		area = new int* [M];
+		for (int i = 0; i < M; i++) {
+			area[i] = new int[N];
+			for (int j = 0; j < N; j++) {
+				do {
+					cin >> area[i][j];
+				} while (area[i][j] < 0 || area[i][j] > 1000);
+			}
 		}
 	}
+}
 
+vector<int> findBirds() {
 	vector<int> birds;
-	int index = 0;
+
 	for (int i = 0; i < N; i++) {
 		bool isEverywhere = true;
 		for (int j = 0; j < M; j++) {
@@ -31,11 +38,22 @@ int main()
 		if (isEverywhere)
 			birds.push_back(i + 1);
 	}
+	return birds;
+}
 
+void output(vector<int> birds) {
+	int index = 0;
 	if (birds.size() != 0)
 		index = birds[0];
-
 	cout << index << endl;
+}
+
+
+int main()
+{
+	input();
+
+	output(findBirds());
 	
 	return 0;
 }
