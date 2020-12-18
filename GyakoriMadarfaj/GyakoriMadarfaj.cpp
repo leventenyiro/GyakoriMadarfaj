@@ -7,16 +7,16 @@ int M, N;
 int** area;
 
 void input() {
-	cin >> M >> N;
-	if (M >= 1 && M <= 50 && N >= 1 && N <= 200) {
-		area = new int* [M];
-		for (int i = 0; i < M; i++) {
-			area[i] = new int[N];
-			for (int j = 0; j < N; j++) {
-				do {
-					cin >> area[i][j];
-				} while (area[i][j] < 0 || area[i][j] > 1000);
-			}
+	do {
+		cin >> M >> N;
+	} while (M < 1 || M > 50 || N < 1 || N > 200);
+	area = new int* [M];
+	for (int i = 0; i < M; i++) {
+		area[i] = new int[N];
+		for (int j = 0; j < N; j++) {
+			do {
+				cin >> area[i][j];
+			} while (area[i][j] < 0 || area[i][j] > 1000);
 		}
 	}
 }
@@ -48,12 +48,9 @@ void output(vector<int> birds) {
 	cout << index << endl;
 }
 
-
 int main()
 {
 	input();
-
 	output(findBirds());
-	
 	return 0;
 }
